@@ -24,9 +24,9 @@ cmake -G "NMake Makefiles" ^
          -Dprotobuf_WITH_ZLIB=ON ^
          ../..
 if errorlevel 1 exit 1
-nmake
+nmake -j "%CPU_COUNT%"
 if errorlevel 1 exit 1
-nmake check
+nmake check -j "%CPU_COUNT%"
 if errorlevel 1 exit 1
 nmake install
 if errorlevel 1 exit 1
@@ -36,5 +36,5 @@ cd %SRC_DIR%
 if errorlevel 1 exit 1
 cd python
 if errorlevel 1 exit 1
-"%PYTHON%" setup.py install --single-version-externally-managed --record record.txt
+"%PYTHON%" setup.py install --single-version-externally-managed --cpp_implementation --record record.txt
 if errorlevel 1 exit 1
